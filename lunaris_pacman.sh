@@ -8,6 +8,7 @@ rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
 rm -rf vendor/nothing/Aerodactyl
 rm -rf vendor/nothing/Pacman
+rm -rf vendor/nothing/PacmanPro
 rm -rf device/mediatek/sepolicy_vndr
 rm -rf hardware/mediatek
 rm -rf hardware/nothing
