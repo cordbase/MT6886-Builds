@@ -3,6 +3,7 @@
 
 set -e
 
+grep -r "/dev/cpuset/" .
 rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
 rm -rf vendor/nothing/Aerodactyl
@@ -45,7 +46,10 @@ PATCHES=(
   "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base.git"
 )
 
-echo "[*] Applying all 7 patches automatically..."
+https://github.com/AxionAOSP-devices/android_device_google_raviole/commit/cee1e28a7fdebfe4327d4e70a14e71c663f94ce8
+https://github.com/Pong-Development/device_nothing_Pong/commit/38ef69f5e90f11750141bffe43e5549c9d429db7
+
+echo "[*] Applying all patches automatically..."
 
 for entry in "${PATCHES[@]}"; do
   IFS="|" read -r REPO_PATH COMMIT_SHA REMOTE_URL <<< "$entry"
@@ -86,7 +90,7 @@ echo "======== Synced Successfully ========"
 export WITH_BCR=true
 export WITH_GMS=true
 export TARGET_USES_CORE_GAPPS=true
-export TARGET_USE_LOWRAM_PROFILE=true
+export TARGET_OPTIMIZED_DEXOPT := true
 
 # ──────────────────────────────
 # Bringup properties (for Settings > About > Bringup)
