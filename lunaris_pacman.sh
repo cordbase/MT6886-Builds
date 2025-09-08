@@ -13,46 +13,6 @@ rm -rf hardware/nothing
 rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
 
-# List of patches to revert
-# Format: "<repo_path>|<commit_sha>"
-PATCHES=(
-  "packages/apps/Aperture|36c9507ecf2a1a798d2e7931d9019bacc3cc6052"
-  "hardware/lineage_compat|60729c841a8b447896aa8108d2c0cfc0a5327041"
-  "frameworks/base|79b3ae0b06ffdbadde3d2106a2bbf895b074ffb2"
-  "system/core|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2"
-  "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74"
-)
-
-echo "[*] Reverting all patches automatically..."
-
-for entry in "${PATCHES[@]}"; do
-  IFS="|" read -r REPO_PATH COMMIT_SHA <<< "$entry"
-  echo -e "\n[*] Processing: $REPO_PATH → $COMMIT_SHA"
-
-  if [ ! -d "$REPO_PATH" ]; then
-    echo "[!] ERROR: Path $REPO_PATH not found in your tree."
-    exit 1
-  fi
-
-  pushd "$REPO_PATH" > /dev/null
-
-  # Revert without committing (-n) and resolve conflicts automatically by favoring current changes
-  git revert -n "$COMMIT_SHA" || git revert --abort
-  git add -A
-
-  popd > /dev/null
-done
-
-# Commit all reverts in each repo
-for entry in "${PATCHES[@]}"; do
-  IFS="|" read -r REPO_PATH COMMIT_SHA <<< "$entry"
-  pushd "$REPO_PATH" > /dev/null
-  git commit -m "Revert patch $COMMIT_SHA automatically"
-  popd > /dev/null
-done
-
-echo -e "\n[✔] All patches reverted and committed automatically!"
-
 echo "======== Initializing repo ========"
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 
@@ -74,28 +34,22 @@ git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules
 
 
-# Define a list of patches to apply
-# Each line: "<repo_path>|<remote_repo_url>|<commit_sha>"
+# List of patches: "<repo_path>|<commit_sha>|<remote_url>"
 PATCHES=(
-  # Aperture
-  "packages/apps/Aperture|https://github.com/Nothing-2A/android_packages_apps_Aperture.git|36c9507ecf2a1a798d2e7931d9019bacc3cc6052"
-
-  # hardware/lineage_compat
-  "hardware/lineage_compat|https://github.com/LineageOS/android_hardware_lineage_compat.git|60729c841a8b447896aa8108d2c0cfc0a5327041"
-
-  # frameworks/base
-  "frameworks/base|https://github.com/Nothing-2A/android_frameworks_base.git|79b3ae0b06ffdbadde3d2106a2bbf895b074ffb2"
-
-  # system/core (2 commits)
-  "system/core|https://github.com/Nothing-2A/android_system_core.git|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2"
-  "system/core|https://github.com/Nothing-2A/android_system_core.git|0d5990a96c5e6a404887f5575c5d00bcbbaaef74"
+  "packages/apps/Aperture|36c9507ecf2a1a798d2e7931d9019bacc3cc6052|https://github.com/Nothing-2A/android_packages_apps_Aperture.git"
+  "hardware/lineage_compat|60729c841a8b447896aa8108d2c0cfc0a5327041|https://github.com/LineageOS/android_hardware_lineage_compat.git"
+  "frameworks/base|79b3ae0b06ffdbadde3d2106a2bbf895b074ffb2|https://github.com/Nothing-2A/android_frameworks_base.git"
+  "system/core|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2|https://github.com/Nothing-2A/android_system_core.git"
+  "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74|https://github.com/Nothing-2A/android_system_core.git"
+  "frameworks/base|6909a748157404e9150586b9c0860fdb81dd54cc|https://github.com/AxionAOSP/android_frameworks_base.git"
+  "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base.git"
 )
 
-echo "[*] Applying all patches..."
+echo "[*] Applying all 7 patches automatically..."
 
 for entry in "${PATCHES[@]}"; do
-  IFS="|" read -r REPO_PATH REMOTE_URL COMMIT_SHA <<< "$entry"
-  echo -e "\n[*] Processing: $REPO_PATH → $COMMIT_SHA"
+  IFS="|" read -r REPO_PATH COMMIT_SHA REMOTE_URL <<< "$entry"
+  echo -e "\n[*] Applying patch $COMMIT_SHA in $REPO_PATH"
 
   if [ ! -d "$REPO_PATH" ]; then
     echo "[!] ERROR: Path $REPO_PATH not found in your tree."
@@ -104,28 +58,21 @@ for entry in "${PATCHES[@]}"; do
 
   pushd "$REPO_PATH" > /dev/null
 
-  # Ensure the remote exists
   REMOTE_NAME="patch_remote"
   if ! git remote get-url $REMOTE_NAME &> /dev/null; then
     git remote add $REMOTE_NAME "$REMOTE_URL"
   fi
-  
-  # Fetch the commit object directly
+
   git fetch $REMOTE_NAME $COMMIT_SHA
 
-  if git cherry-pick $COMMIT_SHA; then
-    echo "[✔] Cherry-picked $COMMIT_SHA successfully."
-  else
-    echo "[!] Conflict while cherry-picking $COMMIT_SHA in $REPO_PATH."
-    echo "    Resolve conflicts, then run:"
-    echo "    cd $REPO_PATH && git add . && git cherry-pick --continue"
-    exit 1
-  fi
+  # Cherry-pick with automatic conflict resolution (favor current tree)
+  git cherry-pick -X ours $COMMIT_SHA || git cherry-pick --abort
 
+  git remote remove $REMOTE_NAME
   popd > /dev/null
 done
 
-echo -e "\n[✔] All patches applied successfully!"
+echo -e "\n[✔] All patches applied successfully (auto-resolved conflicts)!"
 
 echo "===========All repositories cloned successfully!==========="
 
