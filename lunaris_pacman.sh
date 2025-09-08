@@ -21,7 +21,7 @@ echo "======== Adding Trees ========"
 
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
 
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Pacman.git vendor/nothing/Pacman
