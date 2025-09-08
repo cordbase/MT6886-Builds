@@ -164,7 +164,7 @@ echo "======== Environment setup ========"
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-lunch lineage_rhode-userdebug
+lunch lineage_pacman-userdebug
 
 echo "======== Starting build ========"
 m lunaris
