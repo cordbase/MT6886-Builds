@@ -46,9 +46,6 @@ PATCHES=(
   "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base.git"
 )
 
-https://github.com/AxionAOSP-devices/android_device_google_raviole/commit/cee1e28a7fdebfe4327d4e70a14e71c663f94ce8
-https://github.com/Pong-Development/device_nothing_Pong/commit/38ef69f5e90f11750141bffe43e5549c9d429db7
-
 echo "[*] Applying all patches automatically..."
 
 for entry in "${PATCHES[@]}"; do
