@@ -3,7 +3,6 @@
 
 set -e
 
-grep -r "/dev/cpuset/" .
 rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
 rm -rf vendor/nothing/Aerodactyl
