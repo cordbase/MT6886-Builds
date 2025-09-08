@@ -94,7 +94,7 @@ export TARGET_OPTIMIZED_DEXOPT := true
 # These go into build.prop at compile time
 # ──────────────────────────────
 export LUNARIS_MAINTAINER="Himanshu"
-export LUNARIS_DEVICE="rhode"
+export LUNARIS_DEVICE="Pacman"
 export LUNARIS_SOURCE="cordbase"
 
 # Add props to system.prop overlay so they get picked up
