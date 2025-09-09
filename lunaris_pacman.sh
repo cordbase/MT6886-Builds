@@ -19,21 +19,27 @@ repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 
 echo "======== Adding Trees ========"
 
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+# devuce tree bringup
+git clone --branch lineage-23.0 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
-
+# vendor bringup
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Pacman.git vendor/nothing/Pacman
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_PacmanPro.git vendor/nothing/PacmanPro
 
+# Hardware bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_mediatek.git hardware/mediatek
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_nothing.git hardware/nothing
 
+# kernel bringup
+git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
 git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules
 
+# Nothing Cmaera bringup
+git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
+git clone https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
 
 # List of patches: "<repo_path>|<commit_sha>|<remote_url>"
 PATCHES=(
@@ -64,10 +70,19 @@ for entry in "${PATCHES[@]}"; do
     git remote add $REMOTE_NAME "$REMOTE_URL"
   fi
 
-  git fetch $REMOTE_NAME $COMMIT_SHA
+  # Special handling for orphan commit in hardware/lineage_compat
+  if [ "$REPO_PATH" == "hardware/lineage_compat" ]; then
+    echo "[*] Fetching orphan commit directly..."
+    git fetch "$REMOTE_URL" "$COMMIT_SHA"
+  else
+    git fetch $REMOTE_NAME $COMMIT_SHA
+  fi
 
   # Cherry-pick with automatic conflict resolution (favor current tree)
-  git cherry-pick -X ours $COMMIT_SHA || git cherry-pick --abort
+  if ! git cherry-pick -X ours $COMMIT_SHA; then
+    echo "[!] Conflict detected, aborting cherry-pick for $COMMIT_SHA"
+    git cherry-pick --abort
+  fi
 
   git remote remove $REMOTE_NAME
   popd > /dev/null
