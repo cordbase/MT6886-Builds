@@ -13,6 +13,9 @@ rm -rf hardware/mediatek
 rm -rf hardware/nothing
 rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
+rm -rf hardware/lineage_compat
+rm -rf device/nothing/Aerodactyl-ntcamera
+rm -rf vendor/nothing/Aerodactyl-ntcamera
 
 echo "======== Initializing repo ========"
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
@@ -40,6 +43,12 @@ git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.gi
 # Nothing Cmaera bringup
 git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
 git clone https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
+# compat bringup
+git clone https://github.com/LineageOS/android_hardware_lineage_compat.git hardware/lineage_compat
+
+# set username
+git config --global user.name "cordbase"
+git config --global user.email "cordbase@users.noreply.github.com"
 
 # List of patches: "<repo_path>|<commit_sha>|<remote_url>"
 PATCHES=(
