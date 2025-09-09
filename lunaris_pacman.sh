@@ -79,11 +79,19 @@ for entry in "${PATCHES[@]}"; do
     git remote add $REMOTE_NAME "$REMOTE_URL"
   fi
 
-  # Fetch only the specific commit (shallow clone)
-  git fetch --depth=1 $REMOTE_NAME $COMMIT_SHA
+  # Special handling for orphan commit in hardware/lineage_compat
+  if [ "$REPO_PATH" == "hardware/lineage_compat" ]; then
+    echo "[*] Fetching orphan commit directly..."
+    git fetch "$REMOTE_URL" "$COMMIT_SHA"
+  else
+    git fetch $REMOTE_NAME $COMMIT_SHA
+  fi
 
   # Cherry-pick with automatic conflict resolution (favor current tree)
-  git cherry-pick -X ours $COMMIT_SHA || git cherry-pick --abort
+  if ! git cherry-pick -X ours $COMMIT_SHA; then
+    echo "[!] Conflict detected, aborting cherry-pick for $COMMIT_SHA"
+    git cherry-pick --abort
+  fi
 
   git remote remove $REMOTE_NAME
   popd > /dev/null
@@ -133,4 +141,4 @@ lunch lineage_pacman-userdebug
 echo "======== Starting build ========"
 m lunaris
 
-echo "✅ Build finished! Check out/target/product/rhode/ for output zip."
+echo "✅ Build finished!"
