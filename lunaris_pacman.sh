@@ -113,15 +113,8 @@ export TARGET_USES_CORE_GAPPS=true
 export TARGET_OPTIMIZED_DEXOPT=true
 export ro.paranoid.maintainer=Himanshu
 
-# Add props to system.prop overlay so they get picked up
-mkdir -p vendor/lunaris/overlay
-cat <<EOF > vendor/lunaris/overlay/bringup.prop
-ro.lunaris.maintainer=${LUNARIS_MAINTAINER}
-ro.lunaris.device=${LUNARIS_DEVICE}
-ro.lunaris.source=${LUNARIS_SOURCE}
-EOF
-
 echo "======== Environment setup ========"
+export USE_CCACHE=0
 . build/envsetup.sh
 
 # ──────────────────────────────
