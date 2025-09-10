@@ -157,6 +157,7 @@ mv build/soong/ccache.go build/soong/ccache.go.bak
 echo "======== ccache dir setup complete ========"
 
 echo "======== Environment setup ========"
+mv build/soong/ccache.go build/soong/ccache.go.bak
 . build/envsetup.sh
 echo "======== Environment setup complete ========"
 # ──────────────────────────────
