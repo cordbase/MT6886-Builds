@@ -125,6 +125,12 @@ sed -i \
 echo "lunaris_strings.xml updated successfully!"
 
 echo "======== Environment setup ========"
+
+mkdir -p ~/bin
+echo -e '#!/bin/bash\nexec "$@"' > ~/bin/ccache
+chmod +x ~/bin/ccache
+export PATH=~/bin:$PATH
+
 export USE_CCACHE=0
 . build/envsetup.sh
 
