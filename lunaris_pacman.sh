@@ -111,7 +111,7 @@ echo "======== Synced Successfully ========"
 export WITH_BCR=true
 export WITH_GMS=true
 export TARGET_USES_CORE_GAPPS=true
-export TARGET_OPTIMIZED_DEXOPT := true
+export TARGET_OPTIMIZED_DEXOPT=true
 
 # ──────────────────────────────
 # Bringup properties (for Settings > About > Bringup)
