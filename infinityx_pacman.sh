@@ -155,5 +155,6 @@ echo "======== Environment setup complete ========"
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-brunch pacman
+lunch infinity_pacman-user
+m bacon
 echo "✅ Build finished!"
