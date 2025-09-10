@@ -113,6 +113,26 @@ export TARGET_USES_CORE_GAPPS=true
 export TARGET_OPTIMIZED_DEXOPT=true
 export ro.paranoid.maintainer=Himanshu
 
+# Update lunaris_strings.xml for device info
+
+XML_FILE="packages/apps/Settings/res/values/lunaris_strings.xml"
+
+# Check if file exists
+if [ ! -f "$XML_FILE" ]; then
+    echo "Error: $XML_FILE not found!"
+    exit 1
+fi
+
+# Use sed to replace the old values with the new ones
+sed -i \
+    -e 's/<string name="lunaris_device_message">.*<\/string>/<string name="lunaris_device_message">Nothing Phone (2a)<\/string>/' \
+    -e 's/<string name="lunaris_processor_code_message">.*<\/string>/<string name="lunaris_processor_code_message">MT 6886<\/string>/' \
+    -e 's/<string name="lunaris_battery_type_message">.*<\/string>/<string name="lunaris_battery_type_message">5000 mAh<\/string>/' \
+    -e 's/<string name="lunaris_screen_message">.*<\/string>/<string name="lunaris_screen_message">Amoled 120hz<\/string>/' \
+    "$XML_FILE"
+
+echo "lunaris_strings.xml updated successfully!"
+
 echo "======== Environment setup ========"
 export USE_CCACHE=0
 . build/envsetup.sh
