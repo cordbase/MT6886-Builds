@@ -4,6 +4,9 @@
 set -e
 set -o pipefail
 
+# Remove old directories
+rm -rf prebuilts/clang/host/linux-x86
+rm -rf out/soong/.intermediates/system/sepolicy
 rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
 rm -rf vendor/nothing/Aerodactyl
@@ -20,6 +23,34 @@ rm -rf vendor/nothing/Aerodactyl-ntcamera
 
 echo "======== Initializing repo ========"
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
+
+echo "======== Syncing sources (Crave optimized) ========"
+/opt/crave/resync.sh
+
+    # remove all issue causing dirs (@safety)
+dirs_to_remove=(
+    hardware/qcom-caf/msm8953
+    hardware/qcom-caf/msm8996
+    hardware/qcom-caf/msm8998
+    hardware/qcom-caf/sdm660
+    hardware/qcom-caf/sdm845
+    hardware/qcom-caf/sm8150
+    hardware/qcom-caf/sm8250
+    hardware/qcom-caf/sm8350
+    hardware/qcom-caf/sm8450
+    hardware/qcom-caf/sm8550
+    hardware/qcom-caf/sm8650
+    hardware/qcom/display/msm8996
+    hardware/qcom/sdm845
+    hardware/qcom/sm7250/display
+    hardware/qcom/sm8150/display
+    vendor/qcom/opensource/commonsys-intf/display
+    vendor/qcom/opensource/display
+    hardware/qcom-caf/sm8350/display/qmaa/*.cpp
+    out/host/linux-x86/bin/go/soong-display_defaults/pkg/android/soong/hardware/qcom/sm8150/display.a
+    hardware/qcom/sm8150/display/display_defaults.go
+)
+rm -rf "${dirs_to_remove[@]}"
 
 echo "======== Adding Trees ========"
 
@@ -99,10 +130,6 @@ done
 echo -e "\n[✔] All patches processed!"
 
 echo "===========All repositories cloned successfully!==========="
-
-echo "======== Syncing sources (Crave optimized) ========"
-/opt/crave/resync.sh
-echo "======== Synced Successfully ========"
 
 # Update lunaris_strings.xml for device info
 
