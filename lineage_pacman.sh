@@ -152,41 +152,11 @@ sed -i \
 
 echo "lunaris_strings.xml updated successfully!"
 
-# fake cccache wrapper
-echo "======== ccache wrapper setup ========"
-mkdir -p ~/bin
-cat > ~/bin/ccache <<'EOF'
-
-case "$1" in
-  -o|-M|-s|--show-stats|--max-size|--set-config)
-    # Just pretend success
-    exit 0
-    ;;
-  --version|-V)
-    echo "ccache (dummy wrapper)"
-    exit 0
-    ;;
-esac
-
-# If first argument is a compiler, run it directly
-if command -v "$1" >/dev/null 2>&1; then
-  shift
-  exec "$1" "$@"
-fi
-
-# Default: just succeed silently
-exit 0
-EOF
-chmod +x ~/bin/ccache
-export PATH=~/bin:$PATH
-
 echo "======== setting ccache dir ========"
-mkdir -p /home/admin/.ccache
-export CCACHE_DIR=/home/admin/.ccache
+mv build/soong/ccache.go build/soong/ccache.go.bak
 echo "======== ccache dir setup complete ========"
 
 echo "======== Environment setup ========"
-export USE_CCACHE=0
 . build/envsetup.sh
 echo "======== Environment setup complete ========"
 # ──────────────────────────────
