@@ -72,9 +72,10 @@ git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_not
 git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules
 
-# Nothing Cmaera bringup
+# Nothing Camera bringup
 git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
 git clone https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
+
 # compat bringup
 git clone https://github.com/LineageOS/android_hardware_lineage_compat.git hardware/lineage_compat
 
@@ -178,7 +179,11 @@ exit 0
 EOF
 chmod +x ~/bin/ccache
 export PATH=~/bin:$PATH
-echo "======== ccache wrapper done ========"
+
+echo "======== setting ccache dir ========"
+mkdir -p /home/admin/.ccache
+export CCACHE_DIR=/home/admin/.ccache
+echo "======== ccache dir setup complete ========"
 
 echo "======== Environment setup ========"
 export USE_CCACHE=0
