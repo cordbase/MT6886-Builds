@@ -24,7 +24,7 @@ repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 echo "======== Adding Trees ========"
 
 # device tree bringup
-git clone --branch lineage-23.0 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+git clone --branch lunaris https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
 # vendor bringup
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
