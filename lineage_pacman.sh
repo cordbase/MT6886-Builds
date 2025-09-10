@@ -193,9 +193,5 @@ echo "======== Environment setup complete ========"
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-lunch lineage_pacman-user
-
-echo "======== Starting build ========"
-m lunaris
-
+brunch pacman
 echo "✅ Build finished!"
