@@ -104,15 +104,6 @@ echo "======== Syncing sources (Crave optimized) ========"
 /opt/crave/resync.sh
 echo "======== Synced Successfully ========"
 
-# ──────────────────────────────
-# Build flags
-# ──────────────────────────────
-export WITH_BCR=true
-export WITH_GMS=true
-export TARGET_USES_CORE_GAPPS=true
-export TARGET_OPTIMIZED_DEXOPT=true
-export ro.paranoid.maintainer=Himanshu
-
 # Update lunaris_strings.xml for device info
 
 XML_FILE="packages/apps/Settings/res/values/lunaris_strings.xml"
