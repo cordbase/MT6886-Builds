@@ -2,6 +2,7 @@
 # Lunaris OS Bringup + Build Script for Crave
 
 set -e
+set -o pipefail
 
 rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
@@ -52,13 +53,13 @@ git config --global user.email "cordbase@users.noreply.github.com"
 
 # List of patches: "<repo_path>|<commit_sha>|<remote_url>"
 PATCHES=(
-  "packages/apps/Aperture|36c9507ecf2a1a798d2e7931d9019bacc3cc6052|https://github.com/Nothing-2A/android_packages_apps_Aperture.git"
-  "hardware/lineage_compat|60729c841a8b447896aa8108d2c0cfc0a5327041|https://github.com/LineageOS/android_hardware_lineage_compat.git"
-  "frameworks/base|79b3ae0b06ffdbadde3d2106a2bbf895b074ffb2|https://github.com/Nothing-2A/android_frameworks_base.git"
-  "system/core|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2|https://github.com/Nothing-2A/android_system_core.git"
-  "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74|https://github.com/Nothing-2A/android_system_core.git"
-  "frameworks/base|6909a748157404e9150586b9c0860fdb81dd54cc|https://github.com/AxionAOSP/android_frameworks_base.git"
-  "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base.git"
+  "packages/apps/Aperture|36c9507ecf2a1a798d2e7931d9019bacc3cc6052|https://github.com/Nothing-2A/android_packages_apps_Aperture"
+  "hardware/lineage_compat|60729c841a8b447896aa8108d2c0cfc0a5327041|https://github.com/LineageOS/android_hardware_lineage_compat"
+  "frameworks/base|79b3ae0b06ffdbadde3d2106a2bbf895b074ffb2|https://github.com/Nothing-2A/android_frameworks_base"
+  "system/core|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2|https://github.com/Nothing-2A/android_system_core"
+  "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74|https://github.com/Nothing-2A/android_system_core"
+  "frameworks/base|6909a748157404e9150586b9c0860fdb81dd54cc|https://github.com/AxionAOSP/android_frameworks_base"
+  "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base"
 )
 
 echo "[*] Applying all patches automatically..."
@@ -67,37 +68,35 @@ for entry in "${PATCHES[@]}"; do
   IFS="|" read -r REPO_PATH COMMIT_SHA REMOTE_URL <<< "$entry"
   echo -e "\n[*] Applying patch $COMMIT_SHA in $REPO_PATH"
 
+  # Clone repo if missing
   if [ ! -d "$REPO_PATH" ]; then
-    echo "[!] ERROR: Path $REPO_PATH not found in your tree."
-    exit 1
+    echo "[*] Path $REPO_PATH not found, cloning..."
+    git clone --depth=1 "$REMOTE_URL" "$REPO_PATH"
   fi
 
   pushd "$REPO_PATH" > /dev/null
 
-  REMOTE_NAME="patch_remote"
-  if ! git remote get-url $REMOTE_NAME &> /dev/null; then
-    git remote add $REMOTE_NAME "$REMOTE_URL"
+  PATCH_URL="$REMOTE_URL/commit/$COMMIT_SHA.patch"
+
+  # Skip if already applied
+  if git log --oneline | grep -q "$COMMIT_SHA"; then
+    echo "[✔] Skipping $COMMIT_SHA (already applied)."
+    popd > /dev/null
+    continue
   fi
 
-  # Special handling for orphan commit in hardware/lineage_compat
-  if [ "$REPO_PATH" == "hardware/lineage_compat" ]; then
-    echo "[*] Fetching orphan commit directly..."
-    git fetch "$REMOTE_URL" "$COMMIT_SHA"
+  echo "[*] Downloading patch from $PATCH_URL"
+  if curl -fsSL "$PATCH_URL" | git am -3; then
+    echo "[✔] Applied $COMMIT_SHA successfully."
   else
-    git fetch $REMOTE_NAME $COMMIT_SHA
+    echo "[!] Conflict detected for $COMMIT_SHA, aborting safely..."
+    git am --abort || true
   fi
 
-  # Cherry-pick with automatic conflict resolution (favor current tree)
-  if ! git cherry-pick -X ours $COMMIT_SHA; then
-    echo "[!] Conflict detected, aborting cherry-pick for $COMMIT_SHA"
-    git cherry-pick --abort
-  fi
-
-  git remote remove $REMOTE_NAME
   popd > /dev/null
 done
 
-echo -e "\n[✔] All patches applied successfully (auto-resolved conflicts)!"
+echo -e "\n[✔] All patches processed!"
 
 echo "===========All repositories cloned successfully!==========="
 
