@@ -19,7 +19,7 @@ rm -rf device/nothing/Aerodactyl-ntcamera
 rm -rf vendor/nothing/Aerodactyl-ntcamera
 
 echo "======== Initializing repo ========"
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
+repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 
 echo "======== Adding Trees ========"
 
@@ -104,9 +104,18 @@ echo "======== Syncing sources (Crave optimized) ========"
 /opt/crave/resync.sh
 echo "======== Synced Successfully ========"
 
-. build/envsetup.sh
+# ──────────────────────────────
+# Build flags
+# ──────────────────────────────
+export WITH_BCR=true
+export WITH_GMS=true
+export TARGET_USES_CORE_GAPPS=true
+export TARGET_OPTIMIZED_DEXOPT=true
+export ro.paranoid.maintainer=Himanshu
 
 echo "======== Environment setup ========"
+export USE_CCACHE=0
+. build/envsetup.sh
 
 # ──────────────────────────────
 # Lunch & Build
@@ -115,6 +124,6 @@ echo "======== Lunching target ========"
 lunch lineage_pacman-userdebug
 
 echo "======== Starting build ========"
-mka bacon
+m lunaris
 
 echo "✅ Build finished!"
