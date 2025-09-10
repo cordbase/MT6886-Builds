@@ -111,14 +111,7 @@ export WITH_BCR=true
 export WITH_GMS=true
 export TARGET_USES_CORE_GAPPS=true
 export TARGET_OPTIMIZED_DEXOPT=true
-
-# ──────────────────────────────
-# Bringup properties (for Settings > About > Bringup)
-# These go into build.prop at compile time
-# ──────────────────────────────
-export LUNARIS_MAINTAINER="Himanshu"
-export LUNARIS_DEVICE="Pacman"
-export LUNARIS_SOURCE="cordbase"
+export ro.paranoid.maintainer=Himanshu
 
 # Add props to system.prop overlay so they get picked up
 mkdir -p vendor/lunaris/overlay
