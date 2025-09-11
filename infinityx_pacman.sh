@@ -149,6 +149,7 @@ export PRODUCT_SYSTEM_PROPERTIES+=" \
 echo "======== flags setup complete ========"
 
 echo "======== Environment setup ========"
+sed -i 's/export USE_CCACHE=1/export USE_CCACHE=0/' build/envsetup.sh
 . build/envsetup.sh
 echo "======== Environment setup complete ========"
 # ──────────────────────────────
