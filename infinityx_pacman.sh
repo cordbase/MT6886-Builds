@@ -149,7 +149,7 @@ export PRODUCT_SYSTEM_PROPERTIES+=" \
 echo "======== flags setup complete ========"
 
 echo "======== Environment setup ========"
-rm -rf /build
+rm -rf build
 git clone -b 16 https://github.com/cordbase/build.git
 . build/envsetup.sh
 echo "======== Environment setup complete ========"
