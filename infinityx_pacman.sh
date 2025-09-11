@@ -73,7 +73,7 @@ git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.gi
 
 # Nothing Camera bringup
 git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
-git clone --branch lineage-23.0  https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
+git clone --branch lineage-23.0 https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
 
 # compat bringup
 git clone https://github.com/LineageOS/android_hardware_lineage_compat.git hardware/lineage_compat
