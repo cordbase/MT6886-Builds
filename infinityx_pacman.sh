@@ -1,9 +1,6 @@
 #!/bin/bash
 # Infinity X Build Script + Build Script for Crave
 
-set -e
-set -o pipefail
-
 # Remove old directories
 rm -rf prebuilts/clang/host/linux-x86
 rm -rf out/soong/.intermediates/system/sepolicy
