@@ -91,6 +91,8 @@ PATCHES=(
   "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74|https://github.com/Nothing-2A/android_system_core"
   "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base"
   "frameworks/base|6909a748157404e9150586b9c0860fdb81dd54cc|https://github.com/AxionAOSP/android_frameworks_base"
+  "build|c6be68fdc8d3d6f2d68b3152185aae9fadfd57f8|https://github.com/cordbase/build"
+  "build|2d02b9cabe4c23a5d0bf2763c842f8669d063c4b|https://github.com/cordbase/build"
 )
 
 echo "[*] Applying all patches automatically..."
