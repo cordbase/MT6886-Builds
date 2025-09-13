@@ -17,6 +17,7 @@ rm -rf kernel/nothing/mt6886-modules
 rm -rf hardware/lineage_compat
 rm -rf device/nothing/Aerodactyl-ntcamera
 rm -rf vendor/nothing/Aerodactyl-ntcamera
+rm -rf hardware/lineage_compat
 
 echo "======== Initializing repo ========"
 repo init --depth=1 --no-repo-verify --git-lfs -u https://github.com/ProjectInfinity-X/manifest -b 16 -g default,-mips,-darwin,-notdefault
