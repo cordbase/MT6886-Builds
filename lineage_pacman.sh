@@ -20,6 +20,7 @@ rm -rf kernel/nothing/mt6886-modules
 rm -rf hardware/lineage_compat
 rm -rf device/nothing/Aerodactyl-ntcamera
 rm -rf vendor/nothing/Aerodactyl-ntcamera
+rm -rf hardware/lineage_compat
 
 echo "======== Initializing repo ========"
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
