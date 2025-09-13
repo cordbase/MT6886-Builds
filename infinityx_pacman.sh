@@ -144,9 +144,7 @@ export PRODUCT_SYSTEM_PROPERTIES+=" \
     ro.infinity.maintainer=$INFINITY_MAINTAINER \
 "
 echo "======== flags setup complete ========"
-rm -rf build/make/tools/compliance
-rm -rf build/make/tools/rbcrun
-rm -rf build/make/tools/fs_config
+
 echo "======== Environment setup ========"
 . build/envsetup.sh
 echo "======== Environment setup complete ========"
