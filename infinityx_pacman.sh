@@ -101,21 +101,6 @@ echo -e "\n[✔] All patches processed!"
 
 echo "===========All repositories cloned successfully!==========="
 
-# ====== Build Flags ======
-export INFINITY_BUILD_TYPE=UNOFFICIAL
-export INFINITY_MAINTAINER="Himanshu"
-export TARGET_HAS_UDFPS=false
-export WITH_GAPPS=true
-
-# ====== Inject Infinity props ======
-export PRODUCT_SYSTEM_PROPERTIES+=" \
-    ro.product.marketname=Nothing Phone (2a) \
-    ro.infinity.soc=Dimensity 7200 Pro (4 nm) \
-    ro.infinity.battery=5000 mAh \
-    ro.infinity.display=AMOLED, 120Hz, 2160Hz PWM, HDR10+ \
-    ro.infinity.camera=50MP + 50MP \
-    ro.infinity.maintainer=$INFINITY_MAINTAINER \
-"
 echo "======== flags setup complete ========"
 
 echo "======== Environment setup ========"
