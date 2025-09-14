@@ -24,31 +24,6 @@ repo init --depth=1 --no-repo-verify --git-lfs -u https://github.com/ProjectInfi
 echo "======== Syncing sources (Crave optimized) ========"
 /opt/crave/resync.sh
 
-    # remove all issue causing dirs (@safety)
-dirs_to_remove=(
-    hardware/qcom-caf/msm8953
-    hardware/qcom-caf/msm8996
-    hardware/qcom-caf/msm8998
-    hardware/qcom-caf/sdm660
-    hardware/qcom-caf/sdm845
-    hardware/qcom-caf/sm8150
-    hardware/qcom-caf/sm8250
-    hardware/qcom-caf/sm8350
-    hardware/qcom-caf/sm8450
-    hardware/qcom-caf/sm8550
-    hardware/qcom-caf/sm8650
-    hardware/qcom/display/msm8996
-    hardware/qcom/sdm845
-    hardware/qcom/sm7250/display
-    hardware/qcom/sm8150/display
-    vendor/qcom/opensource/commonsys-intf/display
-    vendor/qcom/opensource/display
-    hardware/qcom-caf/sm8350/display/qmaa/*.cpp
-    out/host/linux-x86/bin/go/soong-display_defaults/pkg/android/soong/hardware/qcom/sm8150/display.a
-    hardware/qcom/sm8150/display/display_defaults.go
-)
-rm -rf "${dirs_to_remove[@]}"
-
 echo "======== Adding Trees ========"
 
 # device tree bringup
