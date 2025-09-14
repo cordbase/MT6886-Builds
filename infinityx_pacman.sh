@@ -24,6 +24,8 @@ repo init --depth=1 --no-repo-verify --git-lfs -u https://github.com/ProjectInfi
 echo "======== Syncing sources (Crave optimized) ========"
 /opt/crave/resync.sh
 
+rm -rf hardware/qcom/sdm845
+
 echo "======== Adding Trees ========"
 
 # device tree bringup
@@ -110,6 +112,6 @@ echo "======== Environment setup complete ========"
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-lunch infinity_pacman-user
+lunch infinity_Pacman-user
 m bacon
 echo "✅ Build finished!"
