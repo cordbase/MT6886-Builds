@@ -1,8 +1,5 @@
 #!/bin/bash
-# Lunaris OS Bringup + Build Script for Crave
-
-set -e
-set -o pipefail
+# Infinity X Build Script + Build Script for Crave
 
 # Remove old directories
 rm -rf prebuilts/clang/host/linux-x86
@@ -23,40 +20,14 @@ rm -rf vendor/nothing/Aerodactyl-ntcamera
 rm -rf hardware/lineage_compat
 
 echo "======== Initializing repo ========"
-repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
-
+repo init --git-lfs --no-clone-bundle -u https://git@github.com/LineageOS/android.git -b refs/changes/42/436442/31
 echo "======== Syncing sources (Crave optimized) ========"
 /opt/crave/resync.sh
-
-    # remove all issue causing dirs (@safety)
-dirs_to_remove=(
-    hardware/qcom-caf/msm8953
-    hardware/qcom-caf/msm8996
-    hardware/qcom-caf/msm8998
-    hardware/qcom-caf/sdm660
-    hardware/qcom-caf/sdm845
-    hardware/qcom-caf/sm8150
-    hardware/qcom-caf/sm8250
-    hardware/qcom-caf/sm8350
-    hardware/qcom-caf/sm8450
-    hardware/qcom-caf/sm8550
-    hardware/qcom-caf/sm8650
-    hardware/qcom/display/msm8996
-    hardware/qcom/sdm845
-    hardware/qcom/sm7250/display
-    hardware/qcom/sm8150/display
-    vendor/qcom/opensource/commonsys-intf/display
-    vendor/qcom/opensource/display
-    hardware/qcom-caf/sm8350/display/qmaa/*.cpp
-    out/host/linux-x86/bin/go/soong-display_defaults/pkg/android/soong/hardware/qcom/sm8150/display.a
-    hardware/qcom/sm8150/display/display_defaults.go
-)
-rm -rf "${dirs_to_remove[@]}"
 
 echo "======== Adding Trees ========"
 
 # device tree bringup
-git clone --branch lunaris https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+git clone --branch lineage-23.0 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
 # vendor bringup
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
@@ -66,7 +37,7 @@ git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor
 # Hardware bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_mediatek.git hardware/mediatek
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_nothing.git hardware/nothing
+git clone --branch lineage-23.0 https://github.com/cordbase/android_hardware_nothing.git hardware/nothing
 
 # kernel bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
@@ -75,10 +46,7 @@ git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.gi
 
 # Nothing Camera bringup
 git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
-git clone https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
-
-# compat bringup
-git clone https://github.com/LineageOS/android_hardware_lineage_compat.git hardware/lineage_compat
+git clone --branch lineage-23.0 https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
 
 # set username
 git config --global user.name "cordbase"
@@ -87,7 +55,7 @@ git config --global user.email "cordbase@users.noreply.github.com"
 # List of patches: "<repo_path>|<commit_sha>|<remote_url>"
 PATCHES=(
   "packages/apps/Aperture|36c9507ecf2a1a798d2e7931d9019bacc3cc6052|https://github.com/Nothing-2A/android_packages_apps_Aperture"
-  "hardware/lineage_compat|60729c841a8b447896aa8108d2c0cfc0a5327041|https://github.com/LineageOS/android_hardware_lineage_compat"
+  "hardware/lineage/compat|60729c841a8b447896aa8108d2c0cfc0a5327041|https://github.com/LineageOS/android_hardware_lineage_compat"
   "frameworks/base|79b3ae0b06ffdbadde3d2106a2bbf895b074ffb2|https://github.com/Nothing-2A/android_frameworks_base"
   "system/core|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2|https://github.com/Nothing-2A/android_system_core"
   "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74|https://github.com/Nothing-2A/android_system_core"
@@ -133,37 +101,15 @@ echo -e "\n[✔] All patches processed!"
 
 echo "===========All repositories cloned successfully!==========="
 
-# Update lunaris_strings.xml for device info
-
-XML_FILE="packages/apps/Settings/res/values/lunaris_strings.xml"
-
-# Check if file exists
-if [ ! -f "$XML_FILE" ]; then
-    echo "Error: $XML_FILE not found!"
-    exit 1
-fi
-
-# Use sed to replace the old values with the new ones
-sed -i \
-    -e 's/<string name="lunaris_device_message">.*<\/string>/<string name="lunaris_device_message">Nothing Phone (2a)<\/string>/' \
-    -e 's/<string name="lunaris_processor_code_message">.*<\/string>/<string name="lunaris_processor_code_message">MT 6886<\/string>/' \
-    -e 's/<string name="lunaris_battery_type_message">.*<\/string>/<string name="lunaris_battery_type_message">5000 mAh<\/string>/' \
-    -e 's/<string name="lunaris_screen_message">.*<\/string>/<string name="lunaris_screen_message">Amoled 120hz<\/string>/' \
-    "$XML_FILE"
-
-echo "lunaris_strings.xml updated successfully!"
-
-echo "======== setting ccache dir ========"
-mv build/soong/ccache.go build/soong/ccache.go.bak
-echo "======== ccache dir setup complete ========"
+echo "======== flags setup complete ========"
 
 echo "======== Environment setup ========"
-mv build/soong/ccache.go build/soong/ccache.go.bak
 . build/envsetup.sh
 echo "======== Environment setup complete ========"
 # ──────────────────────────────
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-brunch pacman
+lunch lineage_Pacman-user
+m bacon
 echo "✅ Build finished!"
