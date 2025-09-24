@@ -17,7 +17,6 @@ rm -rf kernel/nothing/mt6886-modules
 rm -rf hardware/lineage_compat
 rm -rf device/nothing/Aerodactyl-ntcamera
 rm -rf vendor/nothing/Aerodactyl-ntcamera
-rm -rf hardware/lineage_compat
 
 echo "======== Initializing repo ========"
 repo init --git-lfs --no-clone-bundle -u https://git@github.com/LineageOS/android.git -b refs/changes/42/436442/31
