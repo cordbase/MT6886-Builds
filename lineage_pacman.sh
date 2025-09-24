@@ -14,7 +14,6 @@ rm -rf hardware/mediatek
 rm -rf hardware/nothing
 rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
-rm -rf hardware/lineage_compat
 rm -rf device/nothing/Aerodactyl-ntcamera
 rm -rf vendor/nothing/Aerodactyl-ntcamera
 
