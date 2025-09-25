@@ -108,6 +108,6 @@ echo "======== Environment setup complete ========"
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-lunch lineage_Pacman-userdebug
+lunch lineage_pacman-userdebug
 m bacon
 echo "✅ Build finished!"
