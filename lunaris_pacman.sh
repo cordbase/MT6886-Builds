@@ -1,9 +1,6 @@
 #!/bin/bash
 # Lunaris OS Bringup + Build Script for Crave
 
-set -e
-set -o pipefail
-
 rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
 rm -rf vendor/nothing/Aerodactyl
@@ -14,7 +11,6 @@ rm -rf hardware/mediatek
 rm -rf hardware/nothing
 rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
-rm -rf hardware/lineage_compat
 rm -rf device/nothing/Aerodactyl-ntcamera
 rm -rf vendor/nothing/Aerodactyl-ntcamera
 
@@ -24,7 +20,7 @@ repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 echo "======== Adding Trees ========"
 
 # device tree bringup
-git clone --branch lineage-23.0 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+git clone --branch lunaris https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
 # vendor bringup
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
@@ -34,7 +30,7 @@ git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor
 # Hardware bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_mediatek.git hardware/mediatek
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_nothing.git hardware/nothing
+git clone --branch lineage-23.0 https://github.com/cordbase/android_hardware_nothing.git hardware/nothing
 
 # kernel bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
@@ -44,8 +40,6 @@ git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.gi
 # Nothing Cmaera bringup
 git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
 git clone https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
-# compat bringup
-git clone https://github.com/LineageOS/android_hardware_lineage_compat.git hardware/lineage_compat
 
 # set username
 git config --global user.name "cordbase"
@@ -103,19 +97,6 @@ echo "===========All repositories cloned successfully!==========="
 echo "======== Syncing sources (Crave optimized) ========"
 /opt/crave/resync.sh
 echo "======== Synced Successfully ========"
-
-# ──────────────────────────────
-# Build flags
-# ──────────────────────────────
-export WITH_BCR=true
-export WITH_GMS=true
-export TARGET_USES_CORE_GAPPS=true
-export TARGET_OPTIMIZED_DEXOPT=true
-export ro.paranoid.maintainer=Himanshu
-
-echo "======== Environment setup ========"
-export USE_CCACHE=0
-. build/envsetup.sh
 
 # ──────────────────────────────
 # Lunch & Build
