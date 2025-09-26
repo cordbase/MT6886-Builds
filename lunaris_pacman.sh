@@ -17,6 +17,10 @@ rm -rf vendor/nothing/Aerodactyl-ntcamera
 echo "======== Initializing repo ========"
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 
+echo "======== Syncing sources (Crave optimized) ========"
+/opt/crave/resync.sh
+echo "======== Synced Successfully ========"
+
 echo "======== Adding Trees ========"
 
 # device tree bringup
@@ -93,10 +97,6 @@ done
 echo -e "\n[✔] All patches processed!"
 
 echo "===========All repositories cloned successfully!==========="
-
-echo "======== Syncing sources (Crave optimized) ========"
-/opt/crave/resync.sh
-echo "======== Synced Successfully ========"
 
 # ──────────────────────────────
 # Lunch & Build
