@@ -106,7 +106,7 @@ echo "enviornment setup complete"
 # Lunch & Build
 # ──────────────────────────────
 echo "======== Lunching target ========"
-lunch lineage_Pacman-bp2a-user
+lunch lineage_pacman-bp2a-user
 
 echo "======== Starting build ========"
 m lunaris
