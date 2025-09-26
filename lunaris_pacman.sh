@@ -98,6 +98,10 @@ echo -e "\n[✔] All patches processed!"
 
 echo "===========All repositories cloned successfully!==========="
 
+echo "enviornment setup"
+. b*/env*
+echo "enviornment setup complete"
+
 # ──────────────────────────────
 # Lunch & Build
 # ──────────────────────────────
@@ -107,4 +111,4 @@ lunch lineage_pacman-userdebug
 echo "======== Starting build ========"
 m lunaris
 
-echo "✅ Build finished!"
+echo "Build finished!"
