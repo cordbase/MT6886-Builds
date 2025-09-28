@@ -105,4 +105,4 @@ source build/envsetup.sh
 lunch clover_Pacman-bp2a-userdebug
 
 # Build
-mka clover -j$(nproc --all)
+mka clover
