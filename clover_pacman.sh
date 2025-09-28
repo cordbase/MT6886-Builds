@@ -14,7 +14,7 @@ rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
 
 # Init Rom Manifest
-repo init --depth=1 -u https://github.com/VoltageOS/manifest.git -b 16 --git-lfs
+repo init -u https://github.com/The-Clover-Project/manifest.git -b 16 --git-lfs
 
 # Sync the repositories  
 /opt/crave/resync.sh 
