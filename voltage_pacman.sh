@@ -40,6 +40,9 @@ git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_not
 git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules
 
+# Dolby BringUP
+git clone --branch Dolby-Vision-1.1 https://github.com/swiitch-OFF-Lab/hardware_dolby.git hardware/dolby
+
 # set username
 git config --global user.name "cordbase"
 git config --global user.email "cordbase@users.noreply.github.com"
