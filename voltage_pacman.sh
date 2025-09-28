@@ -19,6 +19,9 @@ repo init --depth=1 -u https://github.com/VoltageOS/manifest.git -b 16 --git-lfs
 # Sync the repositories  
 /opt/crave/resync.sh 
 
+#Cleanup
+rm -rf hardware/lineage/interfaces/sensors
+
 # device tree bringup
 git clone --branch voltage-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
