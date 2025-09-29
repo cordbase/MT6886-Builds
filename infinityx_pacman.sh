@@ -23,7 +23,7 @@ repo init --depth=1 --no-repo-verify --git-lfs -u https://github.com/ProjectInfi
 rm -rf hardware/lineage/interfaces/sensors
 
 # device tree bringup
-git clone --branch clover-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+git clone --branch infinityx https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
 # vendor bringup
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
