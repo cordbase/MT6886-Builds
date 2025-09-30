@@ -97,26 +97,25 @@ echo -e "All patches processed!"
 GSI_DIR="build/target/product/gsi"
 TARGET_PATH="$GSI_DIR/Android.bp"
 
-# Skip entirely if directory doesn't exist
+# Skip stub creation if directory doesn't exist, but continue script
 if [ ! -d "$GSI_DIR" ]; then
-    echo "Directory '$GSI_DIR' not found — skipping."
-    exit 0
-fi
+    echo "Directory '$GSI_DIR' not found — skipping stub creation."
+else
+    # Remove original Android.bp if it exists
+    if [ -f "$TARGET_PATH" ]; then
+        echo "Removing original '$TARGET_PATH'"
+        rm -f "$TARGET_PATH"
+    fi
 
-# Remove original Android.bp if it exists
-if [ -f "$TARGET_PATH" ]; then
-    echo "Removing original '$TARGET_PATH'"
-    rm -f "$TARGET_PATH"
-fi
-
-# Write minimal fake Android.bp
-cat > "$TARGET_PATH" <<'EOF'
+    # Write minimal fake Android.bp
+    cat > "$TARGET_PATH" <<'EOF'
 // Fake GSI Android.bp to bypass Soong parsing errors
 soong_namespace {
 }
 EOF
 
-echo "Stub Android.bp created at '$TARGET_PATH'"
+    echo "Stub Android.bp created at '$TARGET_PATH'"
+fi
 
 # Variables
 export BUILD_USERNAME=Himanshu
