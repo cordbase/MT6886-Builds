@@ -14,7 +14,7 @@ rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
 
 # Init Rom Manifest
-repo init --depth=1 --no-repo-verify --git-lfs -u https://github.com/ProjectInfinity-X/manifest -b 16 -g default,-mips,-darwin,-notdefault
+repo init -u https://github.com/ProjectInfinity-X/manifest -b 16 --git-lfs
 
 # Sync the repositories  
 /opt/crave/resync.sh 
@@ -92,6 +92,30 @@ for entry in "${PATCHES[@]}"; do
 done
 
 echo -e "All patches processed!"
+
+# Removing conflicts @ target build/target/product/gsi/Android.bp
+GSI_DIR="test/vts-testcase/vndk"
+TARGET_PATH="$GSI_DIR/Android.bp"
+
+# Skip stub creation if directory doesn't exist, but continue script
+if [ ! -d "$GSI_DIR" ]; then
+    echo "Directory '$GSI_DIR' not found — skipping stub creation."
+else
+    # Remove original Android.bp if it exists
+    if [ -f "$TARGET_PATH" ]; then
+        echo "Removing original '$TARGET_PATH'"
+        rm -f "$TARGET_PATH"
+    fi
+
+    # Write minimal fake Android.bp
+    cat > "$TARGET_PATH" <<'EOF'
+// Fake GSI Android.bp to bypass Soong parsing errors
+soong_namespace {
+}
+EOF
+
+    echo "Stub Android.bp created at '$TARGET_PATH'"
+fi
 
 # Removing conflicts @ target build/target/product/gsi/Android.bp
 GSI_DIR="build/target/product/gsi"
