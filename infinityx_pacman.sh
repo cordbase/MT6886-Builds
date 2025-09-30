@@ -93,6 +93,31 @@ done
 
 echo -e "All patches processed!"
 
+# Removing conflicts @ target build/target/product/gsi/Android.bp
+GSI_DIR="build/target/product/gsi"
+TARGET_PATH="$GSI_DIR/Android.bp"
+
+# Skip entirely if directory doesn't exist
+if [ ! -d "$GSI_DIR" ]; then
+    echo "Directory '$GSI_DIR' not found — skipping."
+    exit 0
+fi
+
+# Remove original Android.bp if it exists
+if [ -f "$TARGET_PATH" ]; then
+    echo "Removing original '$TARGET_PATH'"
+    rm -f "$TARGET_PATH"
+fi
+
+# Write minimal fake Android.bp
+cat > "$TARGET_PATH" <<'EOF'
+// Fake GSI Android.bp to bypass Soong parsing errors
+soong_namespace {
+}
+EOF
+
+echo "Stub Android.bp created at '$TARGET_PATH'"
+
 # Variables
 export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
