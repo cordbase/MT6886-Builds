@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="github"
+          fetch="https://github.com" />
+  <remote name="gitlab"
+          fetch="https://gitlab.com" />
+
+  <project name="cordbase/android_device_nothing_Aerodactyl" path="device/nothing/Aerodactyl" remote="github" revision="infinityx" />
+
+  <project name="nothing-2a/proprietary_vendor_nothing_Aerodactyl" path="vendor/nothing/Aerodactyl" remote="gitlab" revision="lineage-23.0" />
+  <project name="nothing-2a/proprietary_vendor_nothing_Pacman" path="vendor/nothing/Pacman" remote="gitlab" revision="lineage-23.0" />
+  <project name="nothing-2a/proprietary_vendor_nothing_PacmanPro" path="vendor/nothing/PacmanPro" remote="gitlab" revision="lineage-23.0" />
+
+  <project name="Nothing-2A/android_device_mediatek_sepolicy_vndr" path="device/mediatek/sepolicy_vndr" remote="github" revision="lineage-23.0" />
+  <project name="Nothing-2A/android_hardware_mediatek" path="hardware/mediatek" remote="github" revision="lineage-23.0" />
+  <project name="cordbase/android_hardware_nothing" path="hardware/nothing" remote="github" revision="lineage-23.0" />
+
+  <project name="Nothing-2A/android_device_nothing_Aerodactyl-kernel" path="device/nothing/Aerodactyl-kernel" remote="github" revision="lineage-23.0" />
+  <project name="Nothing-2A/android_kernel_nothing_mt6886" path="kernel/nothing/mt6886" remote="github" revision="main" />
+  <project name="Nothing-2A/android_kernel_modules_nothing_mt6886" path="kernel/nothing/mt6886-modules" remote="github" revision="main" />
+
+  <project name="swiitch-OFF-Lab/hardware_dolby" path="hardware/dolby" remote="github" revision="Dolby-Vision-1.1" />
+
+</manifest>
