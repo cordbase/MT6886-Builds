@@ -17,7 +17,7 @@ rm -rf kernel/nothing/mt6886-modules
 repo init --no-repo-verify --git-lfs -u https://github.com/ProjectInfinity-X/manifest -b 16 -g default,-mips,-darwin,-notdefault
 
 # Device Bringup
-curl -L https://raw.githubusercontent.com/cordbase/MT6886-Builds/main/infinityx.xml -o .repo/local_manifests/infinityx.xml
+curl -L https://raw.githubusercontent.com/cordbase/MT6886-Builds/main/infinityx.xml -o .repo/local_manifests/local_manifests.xml
 
 # Sync the repositories  
 /opt/crave/resync.sh 
