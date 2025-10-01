@@ -94,13 +94,22 @@ done
 echo -e "All patches processed!"
 
 # Removing conflicts @ target build/target/product/gsi/Android.bp
-GSI_DIR="test/vts-testcase/vndk"
-TARGET_PATH="$GSI_DIR/Android.bp"
 
-# Skip stub creation if directory doesn't exist, but continue script
-if [ ! -d "$GSI_DIR" ]; then
-    echo "Directory '$GSI_DIR' not found — skipping stub creation."
-else
+# List of directories where we may need stubs
+GSI_DIRS=(
+    "test/vts-testcase/vndk"
+    "build/target/product/gsi"
+    "device/generic/goldfish"
+)
+
+for GSI_DIR in "${GSI_DIRS[@]}"; do
+    TARGET_PATH="$GSI_DIR/Android.bp"
+
+    if [ ! -d "$GSI_DIR" ]; then
+        echo "Directory '$GSI_DIR' not found — skipping."
+        continue
+    fi
+
     # Remove original Android.bp if it exists
     if [ -f "$TARGET_PATH" ]; then
         echo "Removing original '$TARGET_PATH'"
@@ -115,31 +124,7 @@ soong_namespace {
 EOF
 
     echo "Stub Android.bp created at '$TARGET_PATH'"
-fi
-
-# Removing conflicts @ target build/target/product/gsi/Android.bp
-GSI_DIR="build/target/product/gsi"
-TARGET_PATH="$GSI_DIR/Android.bp"
-
-# Skip stub creation if directory doesn't exist, but continue script
-if [ ! -d "$GSI_DIR" ]; then
-    echo "Directory '$GSI_DIR' not found — skipping stub creation."
-else
-    # Remove original Android.bp if it exists
-    if [ -f "$TARGET_PATH" ]; then
-        echo "Removing original '$TARGET_PATH'"
-        rm -f "$TARGET_PATH"
-    fi
-
-    # Write minimal fake Android.bp
-    cat > "$TARGET_PATH" <<'EOF'
-// Fake GSI Android.bp to bypass Soong parsing errors
-soong_namespace {
-}
-EOF
-
-    echo "Stub Android.bp created at '$TARGET_PATH'"
-fi
+done
 
 # Variables
 export BUILD_USERNAME=Himanshu
