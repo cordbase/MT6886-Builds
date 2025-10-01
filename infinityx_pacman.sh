@@ -98,7 +98,7 @@ echo -e "All patches processed!"
 # Lists of Directories
 DIRS=(
     # gsi target
-    "target/product/gsi"
+    "build/target/product/gsi"
     # generic device
     "device/sample"
     "device/amlogic/yukawa"
