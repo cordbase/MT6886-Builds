@@ -2,6 +2,8 @@
 # Clover Bringup + Build Script for Crave
 
 # Cleanup
+rm -rf .repo/local_manifests
+rm -rf prebuilts/clang/host/linux-x86
 rm -rf device/nothing/Aerodactyl
 rm -rf device/nothing/Aerodactyl-kernel
 rm -rf vendor/nothing/Aerodactyl
