@@ -99,7 +99,12 @@ echo -e "All patches processed!"
 GSI_DIRS=(
     "test/vts-testcase/vndk"
     "build/target/product/gsi"
-    "device/generic/goldfish"
+    "test/vts/tests/kernel_proc_file_api_test"
+    "test/vts-testcase/hal/treble/platform_version"
+    "test/vts-testcase/kernel/checkpoint"
+    "test/vts-testcase/security/system_property"
+    "test/vts-testcase/kernel/fuse_bpf"
+    "packages/apps/DeviceDiagnostics/TradeInModeTests"
 )
 
 for GSI_DIR in "${GSI_DIRS[@]}"; do
