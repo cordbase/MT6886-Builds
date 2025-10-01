@@ -123,15 +123,13 @@ DIRS=(
     "test/vts/tests/kernel_proc_file_api_test"
     "test/mlts/models"
     "test/vts-testcase/hal/treble/platform_version"
-    "test/suite_harness"
     "test/vts-testcase/kernel/checkpoint"
-    # kernel & other stuffs
     "test/vts-testcase/security/system_property"
-    "tools/test/connectivity"
     "test/vts-testcase/kernel/fuse_bpf"
+    # kernel & other stuffs
+    "tools/test/connectivity"
     "external/linux-kselftest"
     "packages/apps/DeviceDiagnostics/TradeInModeTests"
-    # kernel & other stuffs
     "tools/test/connectivity"
     "external/linux-kselftest"
     "kernel/tests"
