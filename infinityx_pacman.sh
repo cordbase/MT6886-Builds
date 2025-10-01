@@ -93,25 +93,61 @@ done
 
 echo -e "All patches processed!"
 
-# Removing conflicts @ target build/target/product/gsi/Android.bp
+# Removing conflicts @ directories
 
-# List of directories where we may need stubs
-GSI_DIRS=(
+# Lists of Directories
+DIRS=(
+    # gsi target
+    "target/product/gsi"
+    # generic device
+    "device/sample"
+    "device/amlogic/yukawa"
+    "device/amlogic/yukawa-kernel"
+    "device/google/atv"
+    "device/google/cuttlefish"
+    "device/linaro/dragonboard"
+    "device/linaro/dragonboard-kernel"
+    "device/linaro/hikey"
+    "device/linaro/hikey-kernel"
+    # tests
+    "cts"
+    "test/mts"
+    "test/vts"
+    "test/vts-testcase/hal"
+    "test/vts-testcase/kernel"
+    "test/vts-testcase/security"
     "test/vts-testcase/vndk"
-    "build/target/product/gsi"
+    "test/mlts/benchmark"
+    "test/mlts/models"
+    "test/suite_harness"
     "test/vts/tests/kernel_proc_file_api_test"
+    "test/mlts/models"
     "test/vts-testcase/hal/treble/platform_version"
+    "test/suite_harness"
     "test/vts-testcase/kernel/checkpoint"
+    # kernel & other stuffs
     "test/vts-testcase/security/system_property"
+    "tools/test/connectivity"
     "test/vts-testcase/kernel/fuse_bpf"
+    "external/linux-kselftest"
     "packages/apps/DeviceDiagnostics/TradeInModeTests"
+    # kernel & other stuffs
+    "tools/test/connectivity"
+    "external/linux-kselftest"
+    "kernel/tests"
+    # test apps
+    "packages/apps/DeviceDiagnostics"
+    "packages/apps/DevCamera"
+    "packages/apps/Test/connectivity"
+    "packages/apps/SampleLocationAttribution"
+    "packages/apps/SpareParts"
 )
 
-for GSI_DIR in "${GSI_DIRS[@]}"; do
-    TARGET_PATH="$GSI_DIR/Android.bp"
+for DIR in "${DIRS[@]}"; do
+    TARGET_PATH="$DIR/Android.bp"
 
-    if [ ! -d "$GSI_DIR" ]; then
-        echo "Directory '$GSI_DIR' not found — skipping."
+    if [ ! -d "$DIR" ]; then
+        echo "Directory '$DIR' not found — skipping."
         continue
     fi
 
@@ -123,7 +159,7 @@ for GSI_DIR in "${GSI_DIRS[@]}"; do
 
     # Write minimal fake Android.bp
     cat > "$TARGET_PATH" <<'EOF'
-// Fake GSI Android.bp to bypass Soong parsing errors
+// Fake Android.bp to bypass Soong parsing errors
 soong_namespace {
 }
 EOF
