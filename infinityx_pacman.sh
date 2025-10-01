@@ -100,6 +100,7 @@ DIRS=(
     # gsi target
     "build/target/product/gsi"
     # generic device
+    "device/google/cuttlefish/host/commands/vhost_user_input"
     "device/sample"
     "device/amlogic/yukawa"
     "device/amlogic/yukawa-kernel"
