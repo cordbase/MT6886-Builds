@@ -18,7 +18,10 @@ rm -rf kernel/nothing/mt6886-modules
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
 
 # Sync the repositories  
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+until repo sync -c -j$(nproc --all) --fail-fast --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune; do
+    echo "Retrying repo sync in 5 seconds..."
+    sleep 5
+done
 
 #Cleanup
 rm -rf hardware/lineage/interfaces/sensors
