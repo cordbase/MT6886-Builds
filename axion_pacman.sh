@@ -90,5 +90,8 @@ gk -s
 # Device + GApps variant lunch
 axion Pacman gms core
 
+# Clean Install Artifacts
+make installclean
+
 # Start the build with full CPU usage
 ax -b
