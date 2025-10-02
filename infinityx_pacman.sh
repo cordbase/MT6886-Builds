@@ -85,7 +85,7 @@ export BUILD_HOSTNAME=crave
 . build/envsetup.sh
 
 # lunch
-lunch infinity_Pacman-userdebug
+lunch infinity_Pacman-bp2a-userdebug
 
 # Build
 m bacon
