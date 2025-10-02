@@ -1,5 +1,5 @@
 #!/bin/bash
-# Clover Bringup + Build Script for Crave
+# Infinityx Bringup + Build Script for Crave
 
 # Cleanup
 rm -rf .repo/local_manifests
