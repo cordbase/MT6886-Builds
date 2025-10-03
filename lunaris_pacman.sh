@@ -176,6 +176,6 @@ export BUILD_HOSTNAME=crave
 
 # lunch
 lunch lineage_Pacman-bp2a-user
-
+make installclean
 # Build
 m lunaris
