@@ -37,7 +37,7 @@ git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor
 # Hardware bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_mediatek.git hardware/mediatek
-git clone --branch lineage-23.0 https://github.com/cordbase/android_hardware_nothing.git hardware/nothing
+git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_nothing.git hardware/nothing
 
 # kernel bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
