@@ -25,6 +25,10 @@ done
 
 #Cleanup
 rm -rf hardware/lineage/interfaces/sensors
+rm -rf device/google/cuttlefish
+rm -rf test/vts-testcase
+rm -rf test/vts/tests
+rm -rf hardware/interfaces/*/vts
 
 # device tree bringup
 git clone --branch lunaris-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
@@ -93,86 +97,12 @@ done
 
 echo "All patches processed!"
 
-# Removing conflicts @ directories
-
-# Lists of Directories
-DIRS=(
-    # gsi target
-    "build/target/product/gsi"
-    # generic device
-    "device/google/cuttlefish/host/commands/vhost_user_input"
-    "device/sample"
-    "device/amlogic/yukawa"
-    "device/amlogic/yukawa-kernel"
-    "device/google/atv"
-    "device/google/cuttlefish"
-    "device/linaro/dragonboard"
-    "device/linaro/dragonboard-kernel"
-    "device/linaro/hikey"
-    "device/linaro/hikey-kernel"
-    # tests
-    "cts"
-    "test/mts"
-    "test/vts"
-    "test/vts-testcase/hal"
-    "test/vts-testcase/kernel"
-    "test/vts-testcase/security"
-    "test/vts-testcase/vndk"
-    "test/mlts/benchmark"
-    "test/mlts/models"
-    "test/suite_harness"
-    "test/vts/tests/kernel_proc_file_api_test"
-    "test/mlts/models"
-    "test/vts-testcase/hal/treble/platform_version"
-    "test/vts-testcase/kernel/checkpoint"
-    "test/vts-testcase/security/system_property"
-    "test/vts-testcase/kernel/fuse_bpf"
-    # kernel & other stuffs
-    "tools/test/connectivity"
-    "external/linux-kselftest"
-    "packages/apps/DeviceDiagnostics/TradeInModeTests"
-    "tools/test/connectivity"
-    "external/linux-kselftest"
-    "kernel/tests"
-    # test apps
-    "packages/apps/DeviceDiagnostics"
-    "packages/apps/DevCamera"
-    "packages/apps/Test/connectivity"
-    "packages/apps/SampleLocationAttribution"
-    "packages/apps/SpareParts"
-)
-
-for DIR in "${DIRS[@]}"; do
-    TARGET_PATH="$DIR/Android.bp"
-
-    if [ ! -d "$DIR" ]; then
-        echo "Directory '$DIR' not found — skipping."
-        continue
-    fi
-
-    # Remove original Android.bp if it exists
-    if [ -f "$TARGET_PATH" ]; then
-        echo "Removing original '$TARGET_PATH'"
-        rm -f "$TARGET_PATH"
-    fi
-
-    # Write minimal fake Android.bp
-    cat > "$TARGET_PATH" <<'EOF'
-// Fake Android.bp to bypass Soong parsing errors
-soong_namespace {
-}
-EOF
-
-    echo "Stub Android.bp created at '$TARGET_PATH'"
-done
-
+# Set up build environment
+. b*/env*
 
 # Variables
 export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
-
-# Set up build environment
-. b*/env*
 
 # lunch
 lunch lineage_Pacman-bp2a-user
