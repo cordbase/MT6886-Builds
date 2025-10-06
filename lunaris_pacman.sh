@@ -26,8 +26,8 @@ done
 #Cleanup
 rm -rf hardware/lineage/interfaces/sensors
 rm -rf device/google/cuttlefish
-rm -rf test/vts-testcase
-rm -rf test/vts/tests
+rm -rf test
+rm -rf cts
 rm -rf hardware/interfaces/*/vts
 
 # device tree bringup
