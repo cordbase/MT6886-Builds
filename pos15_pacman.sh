@@ -12,7 +12,8 @@ repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs
 git clone https://github.com/cordbase/local_manifest.git -b pos .repo/local_manifests
 
 # Sync the repositories  
-/opt/crave/resync.sh
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+
 
 # set username
 git config --global user.name "cordbase"
@@ -69,6 +70,7 @@ export BUILD_HOSTNAME=crave
 
 # Lunch
 lunch aosp_Pacman-bp2a-userdebug
+make installclean
 
 # Build
 mka bacon
