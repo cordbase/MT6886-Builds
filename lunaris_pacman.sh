@@ -3,16 +3,6 @@
 
 # Cleanup
 rm -rf prebuilts/clang/host/linux-x86
-rm -rf device/nothing/Aerodactyl
-rm -rf device/nothing/Aerodactyl-kernel
-rm -rf vendor/nothing/Aerodactyl
-rm -rf vendor/nothing/Pacman
-rm -rf vendor/nothing/PacmanPro
-rm -rf device/mediatek/sepolicy_vndr
-rm -rf hardware/mediatek
-rm -rf hardware/nothing
-rm -rf kernel/nothing/mt6886
-rm -rf kernel/nothing/mt6886-modules
 
 # Init Rom Manifest
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
