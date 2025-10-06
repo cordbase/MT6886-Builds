@@ -3,6 +3,7 @@
 
 # Cleanup
 rm -rf prebuilts/clang/host/linux-x86
+em -rf .repo/local_manifests
 
 # Init Rom Manifest
 repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs
