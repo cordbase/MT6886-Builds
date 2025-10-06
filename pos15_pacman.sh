@@ -8,6 +8,7 @@ rm -rf prebuilts/clang/host/linux-x86
 repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs
 
 # Device Manifest
+git clone https://github.com/cordbase/local_manifest.git -b pos .repo/local_manifests
 
 # Sync the repositories  
 /opt/crave/resync.sh
