@@ -30,6 +30,10 @@ rm -rf test
 rm -rf cts
 rm -rf hardware/interfaces/*/vts
 
+# Comment out csuite_test modules in the specific Android.bp files
+sed -i '/csuite_test/ s/^/#/' frameworks/base/libs/WindowManager/Shell/tests/flicker/pip/Android.bp
+sed -i '/csuite_test/ s/^/#/' art/test/Android.bp
+
 # device tree bringup
 git clone --branch lunaris-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
