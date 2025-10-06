@@ -59,14 +59,14 @@ done
 echo "All patches processed!"
 
 # Set up build environment
-. b*/env*
+source build/envsetup.sh
 
 # Variables
 export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
 
-# lunch
-lunch lineage_Pacman-bp2a-user
-make installclean
+# Lunch
+lunch aosp_Pacman-bp2a-userdebug
+
 # Build
-m lunaris
+mka bacon
