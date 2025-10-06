@@ -18,6 +18,11 @@ rm -rf cts
 rm -rf hardware/interfaces/*/vts
 rm -rf art/test
 rm -rf frameworks/base/libs/WindowManager/Shell/tests
+rm -rf packages/modules/*/tests
+rm -rf platform_testing/libraries/sts-common-util/apps/MainlineModuleDetector
+rm -rf packages/modules/*/tests
+rm -rf packages/modules/*/*/tests
+rm -rf device/google/cuttlefish_vmm
 
 # device tree bringup
 git clone --branch lunaris-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
