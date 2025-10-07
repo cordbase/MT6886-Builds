@@ -3,7 +3,7 @@
 echo "Starting!"
 # Cleanup
 rm -rf prebuilts/clang/host/linux-x86
-em -rf .repo/local_manifests
+rm -rf .repo/local_manifests
 
 echo "repo"
 # Init Rom Manifest
