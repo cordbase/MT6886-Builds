@@ -1,6 +1,6 @@
 #!/bin/bash
 # LunarisAOSP Bringup + Build Script for Crave
-
+echo "Starting!"
 # Cleanup
 rm -rf prebuilts/clang/host/linux-x86
 em -rf .repo/local_manifests
