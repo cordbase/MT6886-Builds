@@ -7,13 +7,13 @@ em -rf .repo/local_manifests
 
 # Init Rom Manifest
 repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs
-
+exho "init"
 # Device Manifest
 git clone https://github.com/cordbase/local_manifest.git -b pos .repo/local_manifests
-
+echo "manifest"
 # Sync the repositories  
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-
+echo "sync"
 
 # set username
 git config --global user.name "cordbase"
