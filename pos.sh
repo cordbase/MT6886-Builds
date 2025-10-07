@@ -5,16 +5,15 @@ echo "Starting!"
 rm -rf prebuilts/clang/host/linux-x86
 em -rf .repo/local_manifests
 
+echo "repo"
 # Init Rom Manifest
-repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs
-exho "init"
-# Device Manifest
-git clone https://github.com/cordbase/local_manifest.git -b pos .repo/local_manifests
-echo "manifest"
-# Sync the repositories  
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-echo "sync"
-
+repo init -u https://github.com/PixelOS-AOSP/android_manifest.git -b sixteen --git-lfs ; git clone https://github.com/cordbase/local_manifests.git --depth 1 -b pos .repo/local_manifests && 
+# Sync the repositories
+if [ -f /usr/bin/resync ]; then
+  /usr/bin/resync # For compatibility with Omansh's Docker image 
+else
+  /opt/crave/resync.sh
+fi && 
 # set username
 git config --global user.name "cordbase"
 git config --global user.email "cordbase@users.noreply.github.com"
