@@ -8,7 +8,7 @@ rm -rf .repo/local_manifests
 echo "repo"
 # Init Rom Manifest
 repo init -u https://github.com/PixelOS-AOSP/android_manifest.git -b sixteen --git-lfs
-git clone https://github.com/cordbase/local_manifests.git --depth 1 -b pos .repo/local_manifests
+git clone https://github.com/cordbase/local_manifest.git --depth 1 -b pos .repo/local_manifests
 /opt/crave/resync.sh
 
 # set username
