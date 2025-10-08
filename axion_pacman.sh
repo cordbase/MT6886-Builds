@@ -18,8 +18,9 @@ rm -rf kernel/nothing/mt6886-modules
 # Init Rom Manifest
 repo init -u https://github.com/AxionAOSP/android.git -b lineage-22.2 --git-lfs
 
-# Sync the repositories  
-/opt/crave/resync.sh
+# Repo sync
+curl https://raw.githubusercontent.com/accupara/docker-images/refs/heads/master/aosp/common/resync.sh | bash
+repo sync -j4
 
 # device tree bringup
 git clone --branch axion-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
