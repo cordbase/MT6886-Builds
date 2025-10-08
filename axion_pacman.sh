@@ -45,6 +45,9 @@ git clone --branch Dolby-Vision-1.1 https://github.com/swiitch-OFF-Lab/hardware_
 
 #Cleanup
 rm -rf hardware/lineage/interfaces/sensors
+rm -rf hardware/qcom/sm7250
+rm -rf hardware/qcom/sdm845
+rm -rf hardware/qcom/sm8150
 
 # set username
 git config --global user.name "cordbase"
