@@ -18,11 +18,26 @@ rm -rf kernel/nothing/mt6886-modules
 # Init Rom Manifest
 repo init -u https://github.com/AxionAOSP/android.git -b lineage-23.0 --git-lfs
 
-# Device Bringup
-git clone https://github.com/cordbase/local_manifest --depth=1 -b axion .repo/local_manifests
-
 # Sync the repositories  
-/opt/crave/resync.sh 
+/opt/crave/resync.sh
+
+# device tree bringup
+git clone --branch lineage-23.0 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+
+# vendor bringup
+git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
+git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Pacman.git vendor/nothing/Pacman
+git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_PacmanPro.git vendor/nothing/PacmanPro
+
+# Hardware bringup
+git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
+git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_mediatek.git hardware/mediatek
+git clone --branch lineage-23.0 https://github.com/cordbase/android_hardware_nothing.git hardware/nothing
+
+# kernel bringup
+git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
+git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
+git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules 
 
 #Cleanup
 rm -rf hardware/lineage/interfaces/sensors
