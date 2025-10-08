@@ -16,13 +16,13 @@ rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
 
 # Init Rom Manifest
-repo init -u https://github.com/AxionAOSP/android.git -b lineage-23.0 --git-lfs
+repo init -u https://github.com/AxionAOSP/android.git -b lineage-22.2 --git-lfs
 
 # Sync the repositories  
 /opt/crave/resync.sh
 
 # device tree bringup
-git clone --branch lineage-23.0 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
+git clone --branch axion-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
 
 # vendor bringup
 git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
@@ -36,7 +36,7 @@ git clone --branch lineage-23.0 https://github.com/cordbase/android_hardware_not
 
 # kernel bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
-git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
+git clone --branch testing https://github.com/cordbase/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules 
 
 #Cleanup
@@ -50,10 +50,6 @@ git config --global user.email "cordbase@users.noreply.github.com"
 PATCHES=(
   "packages/apps/Aperture|36c9507ecf2a1a798d2e7931d9019bacc3cc6052|https://github.com/Nothing-2A/android_packages_apps_Aperture"
   "hardware/lineage/compat|60729c841a8b447896aa8108d2c0cfc0a5327041|https://github.com/LineageOS/android_hardware_lineage_compat"
-  "system/core|8ff6e7a68523c3b870d8dcd5713c71ea15b43dd2|https://github.com/Nothing-2A/android_system_core"
-  "system/core|0d5990a96c5e6a404887f5575c5d00bcbbaaef74|https://github.com/Nothing-2A/android_system_core"
-  "frameworks/base|f89e8fa592233d86ad2cabf81df245c4003587cb|https://github.com/AxionAOSP/android_frameworks_base"
-  "frameworks/base|6909a748157404e9150586b9c0860fdb81dd54cc|https://github.com/AxionAOSP/android_frameworks_base"
 )
 
 echo "[*] Applying all patches automatically..."
