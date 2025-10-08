@@ -93,7 +93,7 @@ export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
 
 # Set up build environment
-source build/envsetup.sh
+source build/envsetup.sh && axionSync
 
 # Generate private signing keys
 gk -s
