@@ -99,7 +99,7 @@ source build/envsetup.sh
 gk -s
 
 # Device + GApps variant lunch
-axion Pacman gms core
+axion lineage_Pacman gms core
 
 # Clean Install Artifacts
 make installclean
