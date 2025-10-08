@@ -99,7 +99,7 @@ source build/envsetup.sh && axionSync
 gk -s
 
 # Device + GApps variant lunch
-axion Pacman user gms core
+axion lineage_Pacman user gms core
 
 # Clean Install Artifacts
 make installclean
