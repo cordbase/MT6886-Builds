@@ -40,6 +40,9 @@ git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_not
 git clone --branch testing https://github.com/cordbase/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules 
 
+# Dolby BringUP
+git clone --branch Dolby-Vision-1.1 https://github.com/swiitch-OFF-Lab/hardware_dolby.git hardware/dolby
+
 #Cleanup
 rm -rf hardware/lineage/interfaces/sensors
 
@@ -96,14 +99,11 @@ export BUILD_HOSTNAME=crave
 # Set up build environment
 source build/envsetup.sh && axionSync
 
-# Generate private signing keys
-gk -s
-
-# Device + GApps variant lunch
-axion lineage_Pacman user gms core
-
 # Clean Install Artifacts
 make installclean
+
+# Device + GApps variant lunch
+axion Pacman user gms core
 
 # Start the build with full CPU usage
 ax -b
