@@ -107,4 +107,4 @@ make installclean
 axion Pacman user gms core
 
 # Start the build with full CPU usage
-ax -b
+ax -br -j$(nproc --all)
