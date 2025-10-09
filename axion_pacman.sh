@@ -95,7 +95,8 @@ echo -e "All patches processed!"
 # Variables
 export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
-
+export WITH_GMS=true
+export WITH_GMS_VARIANT=core
 # Set up build environment
 source build/envsetup.sh && axionSync
 
@@ -103,7 +104,7 @@ source build/envsetup.sh && axionSync
 make installclean
 
 # Device + GApps variant lunch
-axion Pacman user gms core
+lunch lineage_Pacman-bp2a-userdebug
 
 # Start the build with full CPU usage
 ax -b
