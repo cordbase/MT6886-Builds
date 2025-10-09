@@ -95,7 +95,6 @@ echo -e "All patches processed!"
 # Variables
 export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
-export TARGET_RELEASE=bp1a
 
 # Set up build environment
 source build/envsetup.sh && axionSync
