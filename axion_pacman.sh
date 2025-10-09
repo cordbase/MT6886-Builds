@@ -16,7 +16,7 @@ rm -rf kernel/nothing/mt6886
 rm -rf kernel/nothing/mt6886-modules
 
 # Init Rom Manifest
-repo init -u https://github.com/AxionAOSP/android.git -b lineage-22.2 --git-lfs
+repo init -u https://github.com/cordbase/android.git -b lineage-22.2 --git-lfs
 
 # Repo sync
 curl https://raw.githubusercontent.com/accupara/docker-images/refs/heads/master/aosp/common/resync.sh | bash
