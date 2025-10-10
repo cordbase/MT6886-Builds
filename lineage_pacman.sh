@@ -39,12 +39,12 @@ git clone --branch lineage-23.0 https://github.com/cordbase/android_hardware_not
 
 # kernel bringup
 git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
-git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
+git clone --branch testing https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
 git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules
 
 # Nothing Camera bringup
 git clone https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-ntcamera.git device/nothing/Aerodactyl-ntcamera
-git clone --branch lineage-23.0 https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
+git clone https://github.com/cordbase/proprietary_vendor_nothing_Aerodactyl-ntcamera.git vendor/nothing/Aerodactyl-ntcamera
 
 # set username
 git config --global user.name "cordbase"
