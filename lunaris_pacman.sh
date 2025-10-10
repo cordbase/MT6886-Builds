@@ -6,8 +6,9 @@ rm -rf prebuilts/clang/host/linux-x86
 
 # Init Rom Manifest
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
+git clone https://github.com/cordbase/local_manifest.git -b luna
 
-# Sync the repositories  
+# Sync the repositories
 /opt/crave/resync.sh
 
 #Cleanup
