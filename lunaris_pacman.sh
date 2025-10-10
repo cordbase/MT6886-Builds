@@ -3,10 +3,23 @@
 
 # Cleanup
 rm -rf prebuilts/clang/host/linux-x86
+rm -rf .repo/local_manifests
+rm -rf device/nothing/Aerodactyl
+rm -rf device/nothing/Aerodactyl-kernel
+rm -rf vendor/nothing/Aerodactyl
+rm -rf vendor/nothing/Pacman
+rm -rf vendor/nothing/PacmanPro
+rm -rf device/mediatek/sepolicy_vndr
+rm -rf hardware/mediatek
+rm -rf hardware/nothing
+rm -rf kernel/nothing/mt6886
+rm -rf kernel/nothing/mt6886-modules
+rm -rf device/nothing/Aerodactyl-ntcamera
+rm -rf vendor/nothing/Aerodactyl-ntcamera
 
 # Init Rom Manifest
 repo init -u https://github.com/Lunaris-AOSP/android -b 16 --git-lfs
-git clone https://github.com/cordbase/local_manifest.git -b luna
+git clone https://github.com/cordbase/local_manifest.git -b luna .repo/local_manifests
 
 # Sync the repositories
 /opt/crave/resync.sh
