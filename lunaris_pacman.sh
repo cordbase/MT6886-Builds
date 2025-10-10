@@ -24,27 +24,6 @@ rm -rf packages/modules/*/tests
 rm -rf packages/modules/*/*/tests
 rm -rf device/google/cuttlefish_vmm
 
-# device tree bringup
-git clone --branch lunaris-A16 https://github.com/cordbase/android_device_nothing_Aerodactyl.git device/nothing/Aerodactyl
-
-# vendor bringup
-git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Aerodactyl.git vendor/nothing/Aerodactyl
-git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_Pacman.git vendor/nothing/Pacman
-git clone --branch lineage-23.0 https://gitlab.com/nothing-2a/proprietary_vendor_nothing_PacmanPro.git vendor/nothing/PacmanPro
-
-# Hardware bringup
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_mediatek.git hardware/mediatek
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_hardware_nothing.git hardware/nothing
-
-# kernel bringup
-git clone --branch lineage-23.0 https://github.com/Nothing-2A/android_device_nothing_Aerodactyl-kernel.git device/nothing/Aerodactyl-kernel
-git clone https://github.com/Nothing-2A/android_kernel_nothing_mt6886.git kernel/nothing/mt6886
-git clone https://github.com/Nothing-2A/android_kernel_modules_nothing_mt6886.git kernel/nothing/mt6886-modules
-
-# Dolby BringUP
-git clone --branch Dolby-Vision-1.1 https://github.com/swiitch-OFF-Lab/hardware_dolby.git hardware/dolby
-
 # set username
 git config --global user.name "cordbase"
 git config --global user.email "cordbase@users.noreply.github.com"
@@ -98,8 +77,8 @@ echo "All patches processed!"
 export BUILD_USERNAME=Himanshu
 export BUILD_HOSTNAME=crave
 
-# lunch
-lunch lineage_Pacman-bp2a-user
+# clean Build
 make installclean
+
 # Build
-m lunaris
+brunch Pacman
